@@ -24,11 +24,11 @@ class Employee extends Model
         'verified_at'
     ];
 
-    public function teams(): BelongsTo {
+    public function team(): BelongsTo {
         return $this->belongsTo(Team::class);
     }
 
-    public function roles(): BelongsTo {
+    public function role(): BelongsTo {
         return $this->belongsTo(Role::class);
     }
 }

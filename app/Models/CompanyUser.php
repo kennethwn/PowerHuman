@@ -16,11 +16,11 @@ class CompanyUser extends Model
         'company_id'
     ];
 
-    public function companies(): BelongsTo {
+    public function company(): BelongsTo {
         return $this->belongsTo(Company::class);
     }
 
-    public function users(): BelongsTo {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }

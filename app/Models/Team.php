@@ -18,7 +18,7 @@ class Team extends Model
         'company_id'
     ];
 
-    public function companies(): BelongsTo {
+    public function company(): BelongsTo {
         return $this->belongsTo(Company::class);
     }
 
