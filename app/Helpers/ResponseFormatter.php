@@ -19,7 +19,7 @@ class ResponseFormatter {
         return response()->json(self::$response, self::$response['meta']['code']);
     }
 
-    public static function error($data, $code, $status, $message) {
+    public static function error($data = null, $code = 400, $status = 'failed', $message = null) {
         self::$response['meta']['code'] = $code;
         self::$response['meta']['status'] = $status;
         self::$response['meta']['message'] = $message;
