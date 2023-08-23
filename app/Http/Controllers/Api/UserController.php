@@ -34,7 +34,7 @@ class UserController extends Controller {
 
             $user = $this->service->findUserByEmail($request->email);
             if (!Hash::check($request->password, $user->password)) {
-                throw new Exception('Credential not found!');
+                return new Exception('Credential not found!');
             }
 
             // Generate token
@@ -43,13 +43,12 @@ class UserController extends Controller {
             // Return response
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
-                'token_time' => 'Bearer',
+                'token_type' => 'Bearer',
                 'user' => $user
             ], 'Login Succeed');
-
         }
         catch(Exception $e) {
-            return ResponseFormatter::error('Credential not found!');
+            return ResponseFormatter::error(null, 400, 'failed', $e->getMessage());
         }
     }
 
