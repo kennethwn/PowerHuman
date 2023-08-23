@@ -20,13 +20,14 @@ use Illuminate\Support\Facades\Route;
 * API routes for user
 *
 */
-Route::post('login', [UserController::class, 'login']);
-
-Route::post('register', [UserController::class, 'register']);
-
-Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-
-Route::get('user', [UserController::class, 'fetch'])->middleware('auth:sanctum');
+Route::name('auth.')->group(function () {
+    Route::post('login', [UserController::class, 'login'])->name('login');
+    Route::post('register', [UserController::class, 'register'])->name('register');
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout', [UserController::class, 'logout'])->name('logout');
+        Route::get('user', [UserController::class, 'fetch'])->name('user');
+    });
+});
 
 
 /*
@@ -34,4 +35,8 @@ Route::get('user', [UserController::class, 'fetch'])->middleware('auth:sanctum')
 * API routes for company
 *
 */
-Route::get('/company', [CompanyController::class, 'all']);
+Route::prefix('company')->name('company.')->middleware('auth:sanctum')->group(function () {
+    Route::get('', [CompanyController::class, 'fetch']);
+    Route::post('', [CompanyController::class, 'createCompany']);
+    Route::post('update/{id}', [CompanyController::class, 'updateCompany']);
+});
