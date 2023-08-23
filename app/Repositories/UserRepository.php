@@ -21,6 +21,6 @@ class UserRepository {
     }
 
     public function findUserByEmail($email): User {
-        return User::where('email', $email)->first();
+        return User::where('email', $email)->firstOrFail();
     }
 }
