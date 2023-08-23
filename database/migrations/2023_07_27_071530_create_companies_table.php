@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id()->unsigned();
             $table->string('name');
             $table->string('logo')->nullable();
-            $table->bigInteger('user_id');
             $table->softDeletes();
             $table->timestamps();
         });
