@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
         // for URL: powerhuman.com/api/company
         if (!$id && !$name) {
-            $companies = $this->service->getRelationWithLoggedUser();
+            $companies = $this->service->getAllCompanies();
             return ResponseFormatter::success($companies->paginate($limit), 'Company found');
         }
 
@@ -56,7 +56,6 @@ class CompanyController extends Controller
             }
 
             $company = $this->service->createCompany($request->name, $path);
-
             if (!$company) {
                 return new Exception('Company not created');
             }
