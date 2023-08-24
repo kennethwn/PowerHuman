@@ -27,18 +27,14 @@ class CompanyRepository {
     }
 
     public function findCompanyById($id) {
-        return $this->getRelationWithLoggedUser()->find($id);
+        return $this->getAllCompanies()->find($id);
     }
 
     public function findCompanyByName($name) {
-        return $this->getRelationWithLoggedUser()->where('name', 'like', '%'.$name.'%')->first();
+        return $this->getAllCompanies()->where('name', 'like', '%'.$name.'%')->first();
     }
 
-    public function getRelationWithUser() {
-        return Company::with('users');
-    }
-
-    public function getRelationWithLoggedUser() {
+    public function getAllCompanies() {
         return Company::whereHas('users', function ($query) {
             $query->where('user_id', Auth::id());
         });
