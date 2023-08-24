@@ -28,11 +28,7 @@ class CompanyService {
         return $this->repository->findCompanyByName($name);
     }
 
-    public function getRelationWithLoggedUser() {
-        return $this->repository->getRelationWithLoggedUser();
-    }
-
-    public function getRelationWithUser() {
-        return $this->repository->getRelationWithUser();
+    public function getAllCompanies() {
+        return $this->repository->getAllCompanies();
     }
 }
