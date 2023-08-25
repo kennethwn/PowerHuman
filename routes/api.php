@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\Api\ResponsibilityController;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +55,29 @@ Route::prefix('team')->name('team.')->middleware('auth:sanctum')->group(function
     Route::get('', [TeamController::class, 'fetch'])->name('fetch');
     Route::post('update/{id}', [TeamController::class, 'updateTeam'])->name('update');
     Route::delete('{id}', [TeamController::class, 'deleteTeam'])->name('delete');
+});
+
+
+/*
+*
+* API routes for role
+*
+*/
+Route::prefix('role')->name('role.')->middleware('auth:sanctum')->group(function () {
+    Route::post('', [RoleController::class, 'createRole'])->name('create');
+    Route::get('', [RoleController::class, 'fetch'])->name('fetch');
+    Route::post('update/{id}', [RoleController::class, 'updateRole'])->name('update');
+    Route::delete('{id}', [RoleController::class, 'deleteRole'])->name('delete');
+});
+
+
+/*
+*
+* API routes for responsibility
+*
+*/
+Route::prefix('responsibility')->name('responsibility.')->middleware('auth:sanctum')->group(function () {
+    Route::post('', [ResponsibilityController::class, 'createResponsibility'])->name('create');
+    Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
+    Route::delete('{id}', [ResponsibilityController::class, 'deleteResponsibility'])->name('delete');
 });
