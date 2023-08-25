@@ -22,7 +22,7 @@ class CompanyRepository {
     public function updateCompany($companyById, $name, $path) {
         return $companyById->update([
             'name' => $name,
-            'logo' => $path
+            'logo' => isset($path) ? $path : $companyById->logo
         ]);
     }
 
