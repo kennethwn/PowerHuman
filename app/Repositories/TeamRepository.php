@@ -22,7 +22,7 @@ class TeamRepository {
     public function updateTeam($team, $name, $icon, $company_id) {
         return $team->update([
             'name' => $name,
-            'icon' => $icon,
+            'icon' => isset($icon) ? $icon : $team->icon,
             'company_id' => $company_id
         ]);
     }
