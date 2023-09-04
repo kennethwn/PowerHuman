@@ -24,7 +24,7 @@ class RoleService {
         return $this->repository->findRoleById($id);
     }
 
-    public function findRoleByName($company_id, $name): Role {
+    public function findRoleByName($company_id, $name) {
         return $this->repository->findRoleByName($company_id, $name);
     }
 
