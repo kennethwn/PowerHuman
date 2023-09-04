@@ -32,26 +32,29 @@ class RoleController extends Controller {
     }
 
     public function fetch(Request $request) {
-        $id = $request->input('id');
-        $name = $request->input('name');
-        $limit = $request->input('limit', 10);
+        try {
+            $id = $request->input('id');
+            $name = $request->input('name');
+            $company_id = $request->input('company_id');
+            $limit = $request->input('limit', 10);
 
-        if (!$id && !$name) {
+            // Retrieve single data
+            if ($id) {
+                $role = $this->service->findRoleById($id);
+                return ResponseFormatter::success($role, 'Role is exists');
+            }
+
+            // Retrieve multiple data
             $roles = $this->service->getAllRoles($request->company_id);
+            if ($name) {
+                $roles = $this->service->findRoleByName($company_id, $name);
+            }
+
             return ResponseFormatter::success($roles->paginate($limit), 'Roles is exists');
         }
-
-        if ($id) {
-            $role = $this->service->findRoleById($id);
+        catch (Exception $e) {
+            return ResponseFormatter::error(null, 500, 'failed', $e->getMessage());
         }
-        else {
-            $role = $this->service->findRoleByName($request->company_id, $name);
-        }
-
-        if (!$role) {
-            return ResponseFormatter::error(null, 404, 'not found', 'Role not found');
-        }
-        return ResponseFormatter::success($role, 'Role is exists');
     }
 
     public function updateRole(UpdateRoleRequest $request, $id) {
