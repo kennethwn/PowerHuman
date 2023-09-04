@@ -29,7 +29,7 @@ class RoleRepository {
         return Role::find($id);
     }
 
-    public function findRoleByName($company_id, $name): Role {
+    public function findRoleByName($company_id, $name) {
         return $this->getAllRoles($company_id)->where('name', 'like', '%'.$name.'%');
     }
 
