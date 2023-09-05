@@ -26,7 +26,7 @@ class RoleRepository {
     }
 
     public function findRoleById($id): Role {
-        return Role::find($id);
+        return Role::with('responsibilities')->find($id);
     }
 
     public function findRoleByName($company_id, $name) {
@@ -34,6 +34,6 @@ class RoleRepository {
     }
 
     public function getAllRoles($company_id) {
-        return Role::where('company_id', $company_id);
+        return Role::with('responsibilities')->where('company_id', $company_id);
     }
 }
