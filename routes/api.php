@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\ResponsibilityController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\TeamController;
@@ -80,4 +81,17 @@ Route::prefix('responsibility')->name('responsibility.')->middleware('auth:sanct
     Route::post('', [ResponsibilityController::class, 'createResponsibility'])->name('create');
     Route::get('', [ResponsibilityController::class, 'fetch'])->name('fetch');
     Route::delete('{id}', [ResponsibilityController::class, 'deleteResponsibility'])->name('delete');
+});
+
+
+/*
+*
+* API routes for employee
+*
+*/
+Route::prefix('employee')->name('employee.')->middleware('auth:sanctum')->group(function () {
+    Route::post('', [EmployeeController::class, 'createEmployee'])->name('create');
+    Route::get('', [EmployeeController::class, 'fetch'])->name('fetch');
+    Route::post('update/{id}', [EmployeeController::class, 'updateEmployee'])->name('update');
+    Route::delete('{id}', [EmployeeController::class, 'deleteEmployee'])->name('delete');
 });
